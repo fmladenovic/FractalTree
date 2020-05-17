@@ -1,6 +1,5 @@
 import math
 import matplotlib.pyplot as plt
-import sys
 
 def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
     if base < end:
@@ -18,17 +17,19 @@ def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
 
         plt.scatter([x, x1, x2], [y, y1, y2]) #TEST
 
-        tree(x1, y1, base)
-        tree(x2, y2, base)
+        tree(x1, y1, base, resize, end, angle)
+        tree(x2, y2, base, resize, end, angle)
 
 if __name__ == "__main__":
     base = 50
-    resize = 0.999
+    resize = 1/2
     end = 10
     angle = 30
     x = 0
     y = 0
 
-    plt.scatter([x], [y]) #TEST
     tree(x, y, base, resize, end, angle)
+
+    plt.scatter([x], [y]) #TEST
     plt.show() #TEST
+
