@@ -2,9 +2,7 @@ import math
 import matplotlib.pyplot as plt
 
 def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
-    if base < end:
-        return
-    else:
+    if base > end:
         y = y + base
         x = x
         base = resize*base
@@ -15,7 +13,10 @@ def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
         y2 = y1
         x2 = x + (base * math.sin(angle))
 
-        plt.scatter([x, x1, x2], [y, y1, y2]) #TEST
+        # plt.scatter([x, x1, x2], [y, y1, y2]) #TEST
+        print("(" + str(x) + ", " + str(y) + ")")
+        print("(" + str(x1) + ", " + str(y1) + ")")
+        print("(" + str(x2) + ", " + str(y2) + ")")
 
         tree(x1, y1, base, resize, end, angle)
         tree(x2, y2, base, resize, end, angle)
@@ -30,6 +31,6 @@ if __name__ == "__main__":
 
     tree(x, y, base, resize, end, angle)
 
-    plt.scatter([x], [y]) #TEST
-    plt.show() #TEST
+    # plt.scatter([x], [y]) #TEST
+    # plt.show() #TEST
 

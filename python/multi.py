@@ -27,8 +27,8 @@ def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
         p1.start()
         p2.start()
         
-        p1.join()
-        p2.join()
+        # p1.join()
+        # p2.join()
 
 
 def tree_s(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
