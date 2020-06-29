@@ -15,7 +15,7 @@ The goal is to compare execution times of several implementations
 
  - First will be written in *python* with support of *multiprocessing* library.
  - Second will be written in *golang* with help of *gorutines*
- - Also, there will be recursion and object implementation
+ - Also, there will be recursive and object implementation
  - And *pharo* visualization.
 
 ## Requirements

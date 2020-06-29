@@ -65,12 +65,14 @@ if __name__ == "__main__":
     p0.start()
     p0.join()
     
+    end = time.perf_counter()
     print(f'Finish in {round(end-start, 5)} secounds(s)')
 
 
 
     start = time.perf_counter()
     tree_s(x, y)
+    
     end = time.perf_counter()
     print(f'Finish in {round(end-start, 5)} secounds(s)')
 
