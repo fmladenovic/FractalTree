@@ -1,0 +1,31 @@
+path := 'C:\Users\filip\Desktop\ntp\git\FractalTree\pharo\objects.txt'.
+
+string := FileStream readOnlyFileNamed: path
+				do: [ :stream | stream contents ].
+splited := string splitOn: '|'.
+map := splited collect: [ :line | (line splitOn: Character space) 
+									collect: [ :number | number asNumber ] 
+								].
+size := map size.
+nodes := (RTEllipse new size: 2; color: Color black)
+	elementsOn: (1 to: size).
+	
+view := RTView new.
+
+1 to: size do: [ :index | (nodes at: index) 
+						translateTo: 
+						((map at: index) at: 1 ) @ ((map at: index) at: 2 )
+					].
+	
+builder := RTEdgeBuilder new
+	view: view;
+	elements: nodes.
+	
+2 to: size do: [ :i | builder 
+							connectFrom: ((map at: i) at: 3) 
+							to: ((map at: i) at: 4) 
+					].
+				
+view addAll: nodes.
+nodes @ RTLabeled.
+view
