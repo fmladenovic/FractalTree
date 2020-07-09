@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <title>FractalTree</title>
+        <link rel="stylesheet" href="fractalTree.css">
+    </head>
+    <body>
+        <script src="lib/sketch.js"></script>
+        <script src="lib/p5.min.js"></script>
+        <script src="branch.js"></script>
+        <script>
+            const PI = 3.14;
+
+            var angle = PI / 4;
+            var sliderAngle;
+
+            var lenB = 100;
+            var sliderLenB;
+
+            var percentage = 0.67;
+            var percentageSlider;
+
+            function setup() {
+                createCanvas(800, 600);
+                sliderAngle = createSlider( 0, TWO_PI, PI / 4, 0.01 );
+                sliderLenB = createSlider( 1, 6, 4, 0.01 );
+                percentageSlider = createSlider( 0.1, 0.75, 0.67, 0.001 );
+
+            }
+            function draw() {
+                background(51);
+                angle = sliderAngle.value();
+                lenB = sliderLenB.value();
+                percentage  = percentageSlider.value();
+                stroke(255);
+                translate( 400, height - 50 );
+                branch(150);
+                
+            }
+
+
+            function branch( len ) {
+                line( 0, 0, 0, -len );
+                translate( 0, -len );
+                if( len < lenB) return;
+                push();
+                rotate( angle );
+                branch( len * percentage );
+                pop();
+                push();
+                rotate(-angle);
+                branch( len * percentage );
+                pop();
+            }
+        </script>
+    </body>
+</html>

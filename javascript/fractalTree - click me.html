@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <title>FractalTree</title>
+        <link rel="stylesheet" href="fractalTree.css">
+    </head>
+    <body>
+        <script src="lib/sketch.js"></script>
+        <script src="lib/p5.min.js"></script>
+        <script src="branch.js"></script>
+        <script src="leaf.js"></script>
+
+        <script>
+            var tree = [];
+            var leaves = [];
+
+            function setup() {
+                createCanvas( 800, 600 );
+                var a = createVector( width / 2, height - 200 );
+                var b = createVector( width/ 2, height - 300 );
+                tree[0] = new Branch( a, b );
+            }
+
+            function mousePressed() {
+                for( var i = tree.length - 1; i >= 0; i-- ){
+                    if( !tree[i].finished ) {
+                        var brs = tree[i].branch();
+                        tree.push( brs[0] );
+                        tree.push( brs[1] );
+                    }
+                }
+                if(random(0, 20) > 7) {
+                    for(var i = 0; i < tree.length; i++) {
+                        if( !tree[i].finished ) {
+                            var leaf = 
+                            leaves.push( new Leaf( tree[i].end.copy() ) );
+                        }
+                    }
+                }
+            }
+
+            function draw() {
+                background(51);
+                for ( var i = 0; i < tree.length; i++ ) {
+                    tree[i].show();
+                }
+                for( var i = 0; i <leaves.length; i++ ) {
+                    leaves[i].show();
+                    leaves[i].jitter();
+                }
+            }
+        </script>
+    </body>
+</html>
