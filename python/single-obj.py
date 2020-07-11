@@ -1,6 +1,6 @@
 import math
 
-PATH = '../pharo/objects.txt'
+PATH = '../pharo/objects1.txt'
 
 
 class Node():
