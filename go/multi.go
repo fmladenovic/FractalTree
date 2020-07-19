@@ -2,8 +2,9 @@ package main
  
 import (
 	"math"
-    "fmt"
-    "time"
+	"fmt"
+	"time"
+	"sync"
 )
 
 func main() {
@@ -14,15 +15,22 @@ func main() {
     x := .0
     y := .0
 
-    start := time.Now()
-    tree(x, y, base, resize, end, angle)
-    duration := time.Since(start)
-    fmt.Println(duration)
+	start := time.Now()
 
+
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go tree(&wg, x, y, base, resize, end, angle)
+	wg.Wait()
+
+
+	duration := time.Since(start)
+	fmt.Println(duration)
 }
  
 
-func tree(x, y, base, resize float64, end float64, angle float64) {
+func tree(wg *sync.WaitGroup, x, y, base, resize float64, end float64, angle float64) {
+	defer wg.Done()
     if base > end {
         y := y + base
         x := x
@@ -38,7 +46,8 @@ func tree(x, y, base, resize float64, end float64, angle float64) {
 		// fmt.Println("(" + strconv.FormatFloat(x1, 'f', 6, 64) + ", " + strconv.FormatFloat(y1, 'f', 6, 64) + ")")
 		// fmt.Println("(" + strconv.FormatFloat(x2, 'f', 6, 64) + ", " + strconv.FormatFloat(y2, 'f', 6, 64) + ")")
 
-        tree(x1, y1, base, resize, end, angle)
-		tree(x2, y2, base, resize, end, angle)
+		wg.Add(2)
+        go tree(wg, x1, y1, base, resize, end, angle)
+		go tree(wg, x2, y2, base, resize, end, angle)
 	}
 }
