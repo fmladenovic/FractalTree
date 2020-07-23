@@ -2,7 +2,7 @@ import math
 import time
 
 
-PATH = '../pharo/test1.txt'
+PATH = '../pharo/test.txt'
 
 
 class Node():
@@ -77,7 +77,7 @@ def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
         base = resize * base
         new_nodes = []
         new_nodes = process_job( generations[(len(generations)-1)], base, angle )
-        generations.append( new_nodes )  
+        generations.append( new_nodes )
 
     return generations
 

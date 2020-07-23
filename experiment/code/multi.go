@@ -39,6 +39,7 @@ func tree(wg *sync.WaitGroup, spawnedAsRoutine bool, spawnControle, x, y, base, 
 		// Nulti proces generiše levi proces čija je oznaka -1, nakon toga 0ti proces se preimenuje u
 		// 1 kako bismo znali do kog račvanja smo stigli - proces 0 (1) nastavlja da obrađuje desnu granu.
 		// Iz procesa 1 i -1 generišemo procese za njihove leve grane. Ponavlja se logika sa početka grananja...
+		// * pogledati sliku processes-tree
 
 		if spawnControle == 0 {
 			wg.Add(1)
@@ -109,3 +110,6 @@ func main() {
 
 // Napomena: Testiranje je rađeno na procesoru: Intel i7-6700 3.40GHz
 
+
+// Zaključak - golang je u stanju čak ~1.86 puta brže da odradi 
+//	četrdeset puta veći posao nego python

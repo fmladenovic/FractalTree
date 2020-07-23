@@ -32,43 +32,38 @@ def tree(spawn_controle, x, y, base = 100, resize = 1/2, end = 10, angle = 45):
         # Nulti proces generiše levi proces čija je oznaka -1, nakon toga 0ti proces se preimenuje u
         #     1 kako bismo znali do kog račvanja smo stigli - proces 0 (1) nastavlja da obrađuje desnu granu.
         # Iz procesa 1 i -1 generišemo procese za njihove leve grane. Ponavlja se logika sa početka grananja...
+        # * pogledati sliku processes-tree
+
 
 
         spawned = False # Obezbeđuje se sinrhonizacija na mestu polaska
         if spawn_controle == 0:
-            # print("gen - -1")
             p1 = Process(target = tree, args = (-1, x1, y2, base, resize, end, angle) )
             p1.start()
             spawned = True
 
         elif spawn_controle == -1:
-            # print("gen - -2")
             p1 = Process(target = tree, args = (-2, x1, y2, base, resize, end, angle) )
             p1.start()
             spawned = True
         # elif spawn_controle == -2:
-        #     # print("gen - -4")
         #     p1 = Process(target = tree, args = (-4, x2, y2, base, resize, end, angle) )
         #     p1.start()
         #     spawned = True
         # elif spawn_controle == -3:
-        #     # print("gen - -6")
         #     p1 = Process(target = tree, args = (-6, x2, y2, base, resize, end, angle) )
         #     p1.start()
         #     spawned = True
 
         elif spawn_controle == 1:
-            # print("gen - 2")
             p1 = Process(target = tree, args = (2, x2, y2, base, resize, end, angle) )
             p1.start()
             spawned = True
         # elif spawn_controle == 2:
-        #     # print("gen - 4")
         #     p1 = Process(target = tree, args = (4, x2, y2, base, resize, end, angle) )
         #     p1.start()
         #     spawned = True
         # elif spawn_controle == 3:
-        #     # print("gen - 6")
         #     p1 = Process(target = tree, args = (6, x2, y2, base, resize, end, angle) )
         #     p1.start()
         #     spawned = True
@@ -118,8 +113,8 @@ if __name__ == "__main__":
 
     # Kada se koristi 7 + 1 procesa brzina izvršavanja je ~44s
     # Kada se koristi 5 + 1 procesa brzina izvršavanja je ~56s
-    # Kada se koristi 3 + 1 procesa brzina izvršavanja je ~39s
-    # Kada se koristi 1 + 1 procesa brzina izvršavanja je ~84s
+    # Kada se koristi 3 + 1 procesa brzina izvršavanja je ~41s
+    # Kada se koristi 1 + 1 procesa brzina izvršavanja je ~78s
 
     # Podsetnik: Bez paralelizacije brzina izvršavanja je ~130s
     #  metoda 'tree' se izvrši 134217727 puta  

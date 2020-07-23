@@ -7,20 +7,6 @@ import (
 	"sync"
 )
 
-
-
-// Metoda se poziva rekurzivno sve dok se dužina grane ne smanji ispod određene granice
-// Iz svake grane se proizvode dve nove (svaka metoda vrši dva rekurzivna poziva - za levu i za desnu granu)
-
-// Parametri:
-// wg - služi da sinhronizuje main metode sa goroutinama
-// spawnedAsRoutine - govori da je data metoda goroutina i da treba da se označi kao završena nakon njenog izvršavanja
-// spawnControle - parametar je dodat kako bi se na osnovu njega aktivirali dodatni procesi
-// x - x pozicija roditeljskog čvora
-// y - y pozicija roditeljskog čvora
-// base - dužina grane
-// resize - koliko ostaje od grane nakon svake iteracije
-// angle - ugao koji zaklapaju grane
 func tree(wg *sync.WaitGroup, spawnedAsRoutine bool, spawnControle, x, y, base, resize float64, end float64, angle float64) {
 	if spawnedAsRoutine {
 		defer wg.Done()
@@ -35,10 +21,6 @@ func tree(wg *sync.WaitGroup, spawnedAsRoutine bool, spawnControle, x, y, base, 
 
         y2 := y1
 		x2 := x + (base * math.Sin(angle))
-
-		// Nulti proces generiše levi proces čija je oznaka -1, nakon toga 0ti proces se preimenuje u
-		// 1 kako bismo znali do kog račvanja smo stigli - proces 0 (1) nastavlja da obrađuje desnu granu.
-		// Iz procesa 1 i -1 generišemo procese za njihove leve grane. Ponavlja se logika sa početka grananja...
 
 		if spawnControle == 0 {
 			wg.Add(1)
@@ -97,15 +79,4 @@ func main() {
 	duration := time.Since(start)
 	fmt.Println(duration)
 }
- 
-// Kada se koristi 7 + 1 goroutina brzina izvršavanja je ~21s
-// Kada se koristi 5 + 1 goroutina brzina izvršavanja je ~30s
-// Kada se koristi 3 + 1 goroutine brzina izvršavanja je ~24s
-// Kada se koristi 1 + 1 goroutine brzina izvršavanja je ~48s
-
-// Podsetnik: Bez paralelizacije brzina izvršavanja je ~85s
-//  metoda 'tree' se izvrši 4294967295 puta  
-
-
-// Napomena: Testiranje je rađeno na procesoru: Intel i7-6700 3.40GHz
 

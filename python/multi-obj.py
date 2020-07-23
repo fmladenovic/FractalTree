@@ -79,7 +79,7 @@ def write_list( nodes ):
 
 
 def process_job(temp, returns_holder, nodes, base, angle ):
-    print(temp, len(nodes), nodes)
+    # print(temp, len(nodes), nodes)
     new_nodes = []
     for i in range( len(nodes) ):
         new_nodes.extend(nodes[i].produce( base, angle ))
@@ -98,7 +98,7 @@ def tree(x, y, base = 100, resize = 1/2, end = 10, angle = 45):
         processes_lists = list(chunker_list(generations[len(generations) - 1], PROCCESSES_COUNT))
         jobs = []
 
-
+        #Globalne promenljive
         for i in range( len(processes_lists) ):
             count_processes+=1
             jobs.append( Process(target = process_job, args = (count_processes, result_queue, processes_lists[i], base, angle)) )

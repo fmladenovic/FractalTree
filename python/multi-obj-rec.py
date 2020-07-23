@@ -38,16 +38,27 @@ class Node():
 
             node1 = Node( x1, y1, angle1, self.id )
             nodes.put( node1 )
-            node1.produce( nodes, base, resize, end, angle )
+
+            p = None
+            if nodes.qsize() == 1:
+                p = Process( target = node1.produce, args = (nodes, base, resize, end, angle) )
+                p.start()
+            else: 
+                node1.produce( nodes, base, resize, end, angle )
 
             node2 = Node( x2, y2, angle2, self.id )
             nodes.put( node2 )
-            if nodes.qsize() == 1:
-                p = Process( target = node2.produce, args = (nodes, base, resize, end, angle) )
-                p.start()
-                p.join()
-            else: 
-                node2.produce( nodes, base, resize, end, angle )
+            node2.produce( nodes, base, resize, end, angle )
+
+            if p != None: p.join()
+
+
+            # if nodes.qsize() == 1:
+            #     p = Process( target = node2.produce, args = (nodes, base, resize, end, angle) )
+            #     p.start()
+            #     p.join()
+            # else: 
+            #     node2.produce( nodes, base, resize, end, angle )
 
 
 def connect_nodes( nodes ):
