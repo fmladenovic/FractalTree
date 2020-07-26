@@ -1,4 +1,4 @@
-path := 'C:\Users\filip\Desktop\ntp\git\FractalTree\pharo\objects.txt'.
+path := 'C:\Users\filip\Desktop\ntp\git\FractalTree\pharo\py-multi.txt'.
 
 string := FileStream readOnlyFileNamed: path
 				do: [ :stream | stream contents ].

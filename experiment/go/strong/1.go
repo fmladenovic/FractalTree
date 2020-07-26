@@ -2,11 +2,12 @@ package main
  
 import (
 	"math"
-    "fmt"
+	"time"
+	"fmt"
 )
 
 
-func tree(x, y, base, resize float64, end float64, angle float64, forkAngle float64, index *int) {
+func tree(x, y, base, resize float64, end float64, angle float64, forkAngle float64) {
     if base > end {
 
 		base = resize*base
@@ -19,12 +20,9 @@ func tree(x, y, base, resize float64, end float64, angle float64, forkAngle floa
         y2 := y + base * math.Cos(angle2)
 		x2 := x + base * math.Sin(angle2)
 
-        *index++
-        tree(x1, y1, base, resize, end, angle, angle1, index)
-        *index++
-        tree(x2, y2, base, resize, end, angle, angle2, index)
-    }
-
+		tree(x1, y1, base, resize, end, angle, angle1)
+		tree(x2, y2, base, resize, end, angle, angle2)
+	}
 }
 
 func main() {
@@ -37,7 +35,10 @@ func main() {
 	
     y = y + base
 
-    var index = 2;
-	tree(x, y, base, resize, end, angle, .0, &index)
-    fmt.Printf("%d\n", index)
+	start := time.Now()
+
+	tree(x, y, base, resize, end, angle, .0)
+
+	duration := time.Since(start)
+	fmt.Println(duration)
 }
