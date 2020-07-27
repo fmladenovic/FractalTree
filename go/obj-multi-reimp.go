@@ -11,10 +11,6 @@ import (
 
 const PATH = "../pharo/go-multi.txt"
 
-// Mоže da se desi da skripta ponekad ne izgeneriše dobar file ali to nije zato što je algoritam loš
-//	već zato što go-routine dele isti memorijski prostor pa dođe do prepisivanja u listi čvorova.
-// Dovoljno je pokrenuti skriptu par puta i izgenerisaće se dobar file.
-
 
 type Node struct {
 	x float64
